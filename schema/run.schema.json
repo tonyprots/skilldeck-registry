@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "run.schema.json",
+  "title": "Прогон по протоколу (run.yaml)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["date", "protocol", "agent", "model", "skill_commit", "inputs", "results", "security", "verdict", "summary"],
+  "properties": {
+    "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "protocol": { "description": "Версия protocol.md", "type": "integer", "minimum": 1 },
+    "demo": { "description": "Данные выдуманы для проверки формата. Сборка для прода падает на таких прогонах", "type": "boolean" },
+    "agent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "enum": ["claude-code", "codex", "cursor", "gemini-cli", "opencode"] },
+        "version": { "type": "string" }
+      }
+    },
+    "model": { "type": "string" },
+    "skill_commit": { "type": "string", "pattern": "^[0-9a-f]{7,40}$" },
+    "inputs": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "title"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "kind": { "description": "typical — обычная задача; bad — плохой вход", "enum": ["typical", "bad"] },
+          "title": { "type": "string" },
+          "source": { "type": "string" },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+        }
+      }
+    },
+    "results": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["input", "with_skill", "baseline", "critic"],
+        "properties": {
+          "input": { "type": "string" },
+          "with_skill": { "type": "string" },
+          "baseline": { "type": "string" },
+          "critic": { "description": "Что выбрал слепой критик", "enum": ["skill", "baseline", "tie", "n/a"] },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "security": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["runs_scripts", "network", "writes"],
+      "properties": {
+        "runs_scripts": { "type": "boolean" },
+        "network": { "description": "Хосты, куда ходит", "type": "array", "items": { "type": "string" } },
+        "writes": { "description": "Куда пишет на диск", "type": "array", "items": { "type": "string" } },
+        "note": { "type": "string" }
+      }
+    },
+    "verdict": {
+      "description": "take — беру; caveats — беру с оговорками; reject — не беру; redundant — не нужен, агент справляется сам",
+      "enum": ["take", "caveats", "reject", "redundant"]
+    },
+    "summary": { "description": "Почему такой вердикт, одна-две фразы", "type": "string", "minLength": 20 },
+    "cost": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tokens": { "type": "integer" },
+        "minutes": { "type": "number" }
+      }
+    }
+  }
+}

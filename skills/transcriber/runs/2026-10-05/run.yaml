@@ -1,0 +1,32 @@
+date: 2026-10-05
+protocol: 1
+demo: true
+agent: { name: claude-code, version: 2.4.0 }
+model: claude-opus-5-5
+skill_commit: "3613a17"
+inputs:
+  - { id: voice-note, kind: typical, title: "Голосовое на 4 минуты, два голоса" }
+  - { id: rutube-talk, kind: typical, title: "Доклад с Рутуба, 38 минут" }
+  - { id: broken-file, kind: bad, title: Обрезанный m4a без заголовка }
+results:
+  - input: voice-note
+    with_skill: Спикеры разведены и названы по именам, термины из словаря, два спорных места в очереди.
+    baseline: Сплошной текст без спикеров, три ошибки в именах.
+    critic: skill
+  - input: rutube-talk
+    with_skill: Скачал по ссылке, 38 минут за 6 минут на M3, субтитры и читаемый текст.
+    baseline: Агент не смог скачать видео и попросил файл.
+    critic: skill
+  - input: broken-file
+    with_skill: Внятная ошибка «файл обрезан, звук до 01:12 расшифрован» и частичный текст.
+    baseline: Агент сообщил, что файл повреждён, текста нет.
+    critic: skill
+    note: Частичный текст — полезнее отказа.
+security:
+  runs_scripts: true
+  network: [huggingface.co, rutube.ru, youtube.com, vk.com, music.yandex.ru]
+  writes: [~/.cache/transcriber, ./transcripts]
+  note: Модели скачиваются один раз при первом запуске, дальше работает без сети.
+verdict: take
+summary: Сильнее агента без скилла на всех трёх входах, плохой файл больше не ломает работу.
+cost: { tokens: 41000, minutes: 14 }

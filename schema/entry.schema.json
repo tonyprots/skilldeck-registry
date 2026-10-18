@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "entry.schema.json",
+  "title": "Карточка скилла (frontmatter entry.md)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "title", "summary", "origin", "author", "license", "agents", "tasks", "works_with_russian"],
+  "properties": {
+    "name": {
+      "description": "Слаг, совпадает с именем папки в skills/",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 64
+    },
+    "title": { "description": "Что делает, по-русски, для заголовка", "type": "string", "minLength": 3, "maxLength": 80 },
+    "summary": { "description": "Одна фраза для списка и meta description", "type": "string", "minLength": 20, "maxLength": 180 },
+    "origin": {
+      "description": "own — мой; fork — моя редакция чужого; curated — чужой, отобран",
+      "enum": ["own", "fork", "curated"]
+    },
+    "author": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "url": { "type": "string", "format": "uri" }
+      }
+    },
+    "source": {
+      "description": "Где лежит код. Обязателен у всех, кроме черновиков",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repo"],
+      "properties": {
+        "repo": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$" },
+        "path": { "description": "Папка скилла внутри репозитория, если не корень", "type": "string" },
+        "skill": { "description": "Имя для npx skills add --skill, если отличается от name", "type": "string" }
+      }
+    },
+    "upstream": {
+      "description": "Для fork: откуда взято",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repo"],
+      "properties": { "repo": { "type": "string" } }
+    },
+    "license": { "description": "SPDX-идентификатор или none", "type": "string" },
+    "agents": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "enum": ["claude-code", "codex", "cursor", "gemini-cli", "opencode"] }
+    },
+    "tasks": {
+      "description": "Слаги из tasks.yaml",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "works_with_russian": { "description": "Решает задачу на русском языке или с российскими сервисами", "type": "boolean" },
+    "install": {
+      "description": "Способы установки сверх выводимых автоматически",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "plugin": {
+          "description": "Если в репозитории есть .claude-plugin/marketplace.json",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["marketplace", "plugin"],
+          "properties": {
+            "marketplace": { "type": "string" },
+            "plugin": { "type": "string" }
+          }
+        },
+        "note": { "type": "string" }
+      }
+    },
+    "pinned": { "type": "boolean" },
+    "draft": { "description": "Не публикуется: нет источника или проверки", "type": "boolean" }
+  },
+  "if": { "properties": { "draft": { "const": true } }, "required": ["draft"] },
+  "else": { "required": ["source"] }
+}
