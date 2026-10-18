@@ -64,7 +64,7 @@
       }
     },
     "verdict": {
-      "description": "take — беру; caveats — беру с оговорками; reject — не беру; redundant — не нужен, агент справляется сам",
+      "description": "take — бери; caveats — бери с оговорками; reject — не бери; redundant — не нужен, агент справляется сам",
       "enum": ["take", "caveats", "reject", "redundant"]
     },
     "summary": { "description": "Почему такой вердикт, одна-две фразы", "type": "string", "minLength": 20 },

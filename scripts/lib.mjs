@@ -22,9 +22,9 @@ const checkEntry = ajv.compile(json('schema/entry.schema.json'));
 const checkRun = ajv.compile(json('schema/run.schema.json'));
 
 export const VERDICTS = {
-  take: 'беру',
-  caveats: 'беру с оговорками',
-  reject: 'не беру',
+  take: 'бери',
+  caveats: 'бери с оговорками',
+  reject: 'не бери',
   redundant: 'не нужен',
 };
 
