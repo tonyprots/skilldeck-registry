@@ -9,10 +9,19 @@ author:
 source:
   repo: nextlevelbuilder/ui-ux-pro-max-skill
   path: .claude/skills/ui-ux-pro-max
+  commit: "56ea9cf174ed"
 license: MIT
 agents: [claude-code, codex, cursor]
+roles: [designer, developer]
 tasks: [ui-design]
-works_with_russian: false
+scan:
+  date: "2026-10-19"
+  files: 73
+  scripts: 18
+  runs_commands: true
+  network: [fonts.google.com, github.com]
+  outside_folder: true
+  hidden_unicode: []
 install:
   plugin:
     marketplace: ui-ux-pro-max-skill

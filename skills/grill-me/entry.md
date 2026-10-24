@@ -9,14 +9,24 @@ author:
 source:
   repo: mattpocock/skills
   path: skills/productivity/grill-me
+  commit: "49dd158d1076"
 license: MIT
 agents: [claude-code, codex, cursor]
+roles: [product, developer, manager, founder]
 tasks: [planning]
-works_with_russian: false
+scan:
+  date: "2026-10-19"
+  files: 2
+  scripts: 0
+  runs_commands: false
+  network: []
+  outside_folder: false
+  hidden_unicode: []
 install:
   plugin:
     marketplace: mattpocock
     plugin: mattpocock-skills
+draft: true
 ---
 
 Три строки инструкции, а агент перестаёт кивать и начинает спорить. Ставлю

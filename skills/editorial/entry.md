@@ -8,8 +8,8 @@ author:
   url: https://tonyprots.ru
 license: MIT
 agents: [claude-code, codex]
+roles: [writer, universal]
 tasks: [russian-text]
-works_with_russian: true
 draft: true
 ---
 

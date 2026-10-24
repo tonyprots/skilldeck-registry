@@ -1,0 +1,49 @@
+name: Скилл для каталога
+description: Предложить скилл в Skilldeck или поправить его карточку
+title: "Скилл: "
+labels: [заявка]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Каждую заявку смотрит человек: скилл попадает в каталог, только если его отобрали руками.
+        Как отбираем и что проверяет разбор кода — https://skilldeck.ru/protocol
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Что нужно
+      options:
+        - Добавить скилл
+        - Поправить карточку
+    validations:
+      required: true
+  - type: input
+    id: repo
+    attributes:
+      label: Репозиторий
+      description: Ссылка на GitHub или SourceCraft.
+      placeholder: https://github.com/owner/repo
+    validations:
+      required: true
+  - type: input
+    id: path
+    attributes:
+      label: Папка скилла в репозитории
+      description: Где лежит SKILL.md, если не в корне.
+      placeholder: skills/my-skill
+  - type: textarea
+    id: why
+    attributes:
+      label: Зачем он
+      description: Какую задачу решает и чем лучше похожих. Для правки карточки — что в ней не так.
+    validations:
+      required: true
+  - type: dropdown
+    id: author
+    attributes:
+      label: Вы автор скилла?
+      options:
+        - Да
+        - Нет
+    validations:
+      required: true

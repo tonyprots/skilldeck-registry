@@ -9,10 +9,19 @@ author:
 source:
   repo: ilyautov/humanizer-ru
   path: skills/humanizer-ru
+  commit: "3621b1ca6b9a"
 license: MIT
 agents: [claude-code, codex]
+roles: [writer, marketer]
 tasks: [russian-text]
-works_with_russian: true
+scan:
+  date: "2026-10-19"
+  files: 21
+  scripts: 13
+  runs_commands: false
+  network: []
+  outside_folder: false
+  hidden_unicode: []
 install:
   plugin:
     marketplace: ilyautov-plugins
