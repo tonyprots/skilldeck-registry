@@ -249,6 +249,9 @@ const manualInstall = ({ name, source, agents = [] }) => {
 /** Команды установки: выводятся из источника, plugin — только если объявлен. */
 export function installCommands(e) {
   if (!e.source) return [];
+  // Свой установщик автора (канон рядом со скиллами и т. п.): копия отдельных
+  // папок или npx skills поставят нерабочий набор, поэтому других способов нет.
+  if (e.install?.command) return [{ id: 'manual', label: 'Вручную', code: e.install.command.trim() }];
   // Набор ставится целиком: сам скилл и все участники, каждый со своего коммита.
   const all = [e, ...(e.members ?? [])].filter((x) => x.source);
   const { repo, host = 'github' } = e.source;

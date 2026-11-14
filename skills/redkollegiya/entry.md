@@ -14,6 +14,7 @@ license: MIT
 agents: [claude-code]
 roles: [writer]
 tasks: [russian-text]
+set_head: "Дирижёр: выбирает режим и порядок, сам текст не правит"
 includes: [chukovsky, agranovsky, slopotron, rozental, milchin]
 scan:
   date: "2026-10-19"
