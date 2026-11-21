@@ -22,7 +22,7 @@ scan:
   network: []
   outside_folder: false
   hidden_unicode: []
-draft: true
+todo: why
 ---
 83 файла, без скриптов.
 В папке лежат шрифты, отсюда больше восьмидесяти файлов.

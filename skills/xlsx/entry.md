@@ -24,7 +24,7 @@ scan:
   outside_folder: false
   hidden_unicode: []
   note: "Адрес schemas.openxmlformats.org — пространство имён формата OOXML в коде, а не запрос в сеть. Сокет в scripts/office/soffice.py локальный (AF_UNIX): через него скилл говорит с LibreOffice."
-draft: true
+todo: why
 ---
 53 файла, 12 скриптов.
 Для пересчёта формул нужен LibreOffice.

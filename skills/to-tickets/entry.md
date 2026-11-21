@@ -22,7 +22,7 @@ scan:
   network: []
   outside_folder: false
   hidden_unicode: []
-draft: true
+todo: why
 ---
 2 файла, без скриптов.
 Трекер и метки задаются отдельным скиллом автора `setup-matt-pocock-skills`.

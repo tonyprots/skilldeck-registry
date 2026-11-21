@@ -24,7 +24,7 @@ scan:
   hidden_unicode:
     - "scripts/text_unicode.py"
   note: "Скрытый юникод в scripts/text_unicode.py — образцы невидимых символов, которые скилл находит и вычищает."
-draft: true
+todo: why
 ---
 10 файлов, 5 скриптов.
 Работает с английским.

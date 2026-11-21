@@ -22,7 +22,7 @@ scan:
   network: []
   outside_folder: true
   hidden_unicode: []
-draft: true
+todo: why
 ---
 20 файлов, 4 скрипта.
 По умолчанию только советует; полный аудит с записью файлов запускается по прямой просьбе.

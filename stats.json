@@ -1,175 +1,257 @@
 {
   "Ashutos1997/claude-design-auditor-skill": {
     "stars": 96,
-    "date": "2026-11-14"
+    "date": "2026-11-21"
   },
   "Ashutos1997/claude-design-auditor-skill@e7a1f3153d8e": {
     "commit_date": "2026-05-17"
   },
   "DenisSergeevitch/agents-best-practices": {
-    "stars": 2432,
-    "date": "2026-11-14"
+    "stars": 2441,
+    "date": "2026-11-21"
   },
   "DenisSergeevitch/agents-best-practices@da245f8cbfc4": {
     "commit_date": "2026-10-19"
   },
+  "Egonex-AI/Understand-Anything": {
+    "stars": 93540,
+    "date": "2026-11-21"
+  },
+  "Egonex-AI/Understand-Anything@bb70fdb0489f": {
+    "commit_date": "2026-11-18"
+  },
   "JuliusBrussee/caveman": {
-    "stars": 119695,
-    "date": "2026-11-14"
+    "stars": 121955,
+    "date": "2026-11-21"
   },
   "JuliusBrussee/caveman@bad48a0e1df5": {
     "commit_date": "2026-10-17"
   },
   "Leonxlnx/taste-skill": {
-    "stars": 115044,
-    "date": "2026-11-14"
+    "stars": 119686,
+    "date": "2026-11-21"
   },
   "Leonxlnx/taste-skill@b9ca2fd8047f": {
     "commit_date": "2026-10-19"
   },
+  "NVIDIA/SkillSpector": {
+    "stars": 27160,
+    "date": "2026-11-21"
+  },
+  "NVIDIA/SkillSpector@48e0f942ea1f": {
+    "commit_date": "2026-11-19"
+  },
+  "addyosmani/agent-skills": {
+    "stars": 119551,
+    "date": "2026-11-21"
+  },
+  "addyosmani/agent-skills@8c99fa36d900": {
+    "commit_date": "2026-11-18"
+  },
+  "anthropics/claude-cookbooks": {
+    "stars": 54949,
+    "date": "2026-11-21"
+  },
+  "anthropics/claude-cookbooks@8ad5de647d4f": {
+    "commit_date": "2026-11-20"
+  },
   "anthropics/skills": {
-    "stars": 194136,
-    "date": "2026-11-14"
+    "stars": 198407,
+    "date": "2026-11-21"
   },
   "anthropics/skills@dbd4588f9e10": {
     "commit_date": "2026-10-09"
   },
+  "anthropics/skills@e4bb5d960d87": {
+    "commit_date": "2026-11-16"
+  },
   "beaverbeard/agranovsky": {
     "stars": 5,
-    "date": "2026-11-14"
+    "date": "2026-11-21"
   },
   "beaverbeard/agranovsky@7c81cb21e1de": {
     "commit_date": "2026-10-02"
   },
   "beaverbeard/chukovsky": {
     "stars": 14,
-    "date": "2026-11-14"
+    "date": "2026-11-21"
   },
   "beaverbeard/chukovsky@26d55599a117": {
     "commit_date": "2026-10-02"
   },
   "beaverbeard/milchin": {
     "stars": 6,
-    "date": "2026-11-14"
+    "date": "2026-11-21"
   },
   "beaverbeard/milchin@09e376847393": {
     "commit_date": "2026-10-02"
   },
   "beaverbeard/redkollegiya": {
-    "stars": 11,
-    "date": "2026-11-14"
+    "stars": 15,
+    "date": "2026-11-21"
   },
   "beaverbeard/redkollegiya@850547a9631b": {
     "commit_date": "2026-10-02"
   },
   "beaverbeard/rozental": {
     "stars": 9,
-    "date": "2026-11-14"
+    "date": "2026-11-21"
   },
   "beaverbeard/rozental@7662116d77fb": {
     "commit_date": "2026-10-02"
   },
   "beaverbeard/slopotron": {
-    "stars": 78,
-    "date": "2026-11-14"
+    "stars": 80,
+    "date": "2026-11-21"
   },
   "beaverbeard/slopotron@122d38545c7e": {
     "commit_date": "2026-10-02"
   },
   "cathrynlavery/diagram-design": {
-    "stars": 66889,
-    "date": "2026-11-14"
+    "stars": 69726,
+    "date": "2026-11-21"
   },
   "cathrynlavery/diagram-design@550fd66edff0": {
     "commit_date": "2026-10-16"
   },
+  "cloudflare/security-audit-skill": {
+    "stars": 76614,
+    "date": "2026-11-21"
+  },
+  "cloudflare/security-audit-skill@c1c8a8c14710": {
+    "commit_date": "2026-09-14"
+  },
+  "coreyhaines31/marketingskills": {
+    "stars": 61851,
+    "date": "2026-11-21"
+  },
+  "coreyhaines31/marketingskills@5b2b400eec1e": {
+    "commit_date": "2026-11-20"
+  },
   "emilkowalski/skills": {
-    "stars": 56673,
-    "date": "2026-11-14"
+    "stars": 58623,
+    "date": "2026-11-21"
   },
   "emilkowalski/skills@2d228630ba14": {
     "commit_date": "2026-10-11"
   },
+  "emilkowalski/skills@64eb3deb9a5f": {
+    "commit_date": "2026-11-15"
+  },
+  "guillaumemeyer/watermarks-remover": {
+    "stars": 28028,
+    "date": "2026-11-21"
+  },
+  "guillaumemeyer/watermarks-remover@5a62be6338d2": {
+    "commit_date": "2026-11-01"
+  },
   "ilyautov/humanizer-ru": {
-    "stars": 562,
-    "date": "2026-11-14"
+    "stars": 602,
+    "date": "2026-11-21"
   },
   "ilyautov/humanizer-ru@3621b1ca6b9a": {
     "commit_date": "2026-10-19"
   },
   "jakubkrehel/make-interfaces-feel-better": {
-    "stars": 4007,
-    "date": "2026-11-14"
+    "stars": 4212,
+    "date": "2026-11-21"
   },
   "jakubkrehel/make-interfaces-feel-better@35545ea1512a": {
     "commit_date": "2026-08-29"
   },
   "mattpocock/skills": {
-    "stars": 323819,
-    "date": "2026-11-14"
+    "stars": 329658,
+    "date": "2026-11-21"
   },
   "mattpocock/skills@49dd158d1076": {
     "commit_date": "2026-10-09"
   },
+  "mattpocock/skills@abeeaf95660b": {
+    "commit_date": "2026-11-19"
+  },
+  "mvanhorn/last30days-skill": {
+    "stars": 71888,
+    "date": "2026-11-21"
+  },
+  "mvanhorn/last30days-skill@8ede659374b2": {
+    "commit_date": "2026-11-21"
+  },
   "nextlevelbuilder/ui-ux-pro-max-skill": {
-    "stars": 149096,
-    "date": "2026-11-14"
+    "stars": 152454,
+    "date": "2026-11-21"
   },
   "nextlevelbuilder/ui-ux-pro-max-skill@56ea9cf174ed": {
     "commit_date": "2026-10-15"
   },
   "obra/superpowers": {
-    "stars": 317231,
-    "date": "2026-11-14"
+    "stars": 323593,
+    "date": "2026-11-21"
+  },
+  "obra/superpowers@22f0b463e7a5": {
+    "commit_date": "2026-11-03"
   },
   "obra/superpowers@bb92a7774141": {
     "commit_date": "2026-10-10"
   },
   "pbakaus/impeccable": {
-    "stars": 109593,
-    "date": "2026-11-14"
+    "stars": 114457,
+    "date": "2026-11-21"
   },
   "pbakaus/impeccable@0665bd812ae0": {
     "commit_date": "2026-10-19"
   },
   "ponomr/palych": {
     "stars": 14,
-    "date": "2026-11-14"
+    "date": "2026-11-21"
   },
   "ponomr/palych@57c2d6c848a3": {
     "commit_date": "2026-10-17"
   },
   "talkstream/ru-text": {
-    "stars": 298,
-    "date": "2026-11-14"
+    "stars": 300,
+    "date": "2026-11-21"
   },
   "talkstream/ru-text@374a77943648": {
     "commit_date": "2026-10-18"
   },
   "tonyprots/html-deck-skill": {
     "stars": 0,
-    "date": "2026-11-14"
+    "date": "2026-11-21"
   },
   "tonyprots/html-deck-skill@559fc8caaedf": {
     "commit_date": "2026-11-12"
   },
   "tonyprots/motion-film-skill": {
     "stars": 7,
-    "date": "2026-11-14"
+    "date": "2026-11-21"
   },
   "tonyprots/motion-film-skill@3bbb8ac5652e": {
     "commit_date": "2026-10-17"
   },
   "tonyprots/transcriber-skill": {
     "stars": 4,
-    "date": "2026-11-14"
+    "date": "2026-11-21"
   },
   "tonyprots/transcriber-skill@2b7bbdab7313": {
     "commit_date": "2026-10-17"
   },
+  "tt-a1i/archify": {
+    "stars": 98550,
+    "date": "2026-11-21"
+  },
+  "tt-a1i/archify@8509a3d63e76": {
+    "commit_date": "2026-11-21"
+  },
+  "tw93/Waza": {
+    "stars": 7628,
+    "date": "2026-11-21"
+  },
+  "tw93/Waza@b944ba7b815f": {
+    "commit_date": "2026-11-18"
+  },
   "zamesin/Next-Move-Theory-Canon-and-Skills": {
-    "stars": 469,
-    "date": "2026-11-14"
+    "stars": 477,
+    "date": "2026-11-21"
   },
   "zamesin/Next-Move-Theory-Canon-and-Skills@f8e87d10255b": {
     "commit_date": "2026-09-13"

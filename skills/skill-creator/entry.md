@@ -22,7 +22,7 @@ scan:
   network: []
   outside_folder: false
   hidden_unicode: []
-draft: true
+todo: why
 ---
 18 файлов, 10 скриптов.
 Прогоны эвалов идут через `claude -p`, поэтому в полном виде работает в Claude Code.

@@ -22,7 +22,7 @@ scan:
   network: []
   outside_folder: false
   hidden_unicode: []
-draft: true
+todo: why
 ---
 2 файла, без скриптов.
 Сам SKILL.md короткий: двенадцать строк про то, как поставить задачу фоновому агенту.

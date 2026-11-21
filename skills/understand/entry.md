@@ -22,7 +22,7 @@ scan:
   network: []
   outside_folder: false
   hidden_unicode: []
-draft: true
+todo: why
 ---
 57 файлов, 15 скриптов.
 Устроен как плагин Claude Code: команда `/understand` и панель автора.

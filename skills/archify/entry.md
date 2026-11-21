@@ -22,7 +22,7 @@ scan:
   network: []
   outside_folder: true
   hidden_unicode: []
-draft: true
+todo: why
 ---
 206 файлов, 103 скрипта.
 
