@@ -10,19 +10,9 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { loadRegistry, ROOT } from './lib.mjs';
+import { ghGet } from './github.mjs';
 
-const token = process.env.GITHUB_TOKEN;
-const headers = {
-  Accept: 'application/vnd.github+json',
-  'X-GitHub-Api-Version': '2022-11-28',
-  'User-Agent': 'skilldeck-stats',
-  ...(token && { Authorization: `Bearer ${token}` }),
-};
-const get = async (path) => {
-  const res = await fetch(`https://api.github.com${path}`, { headers });
-  if (!res.ok) throw new Error(`${path}: HTTP ${res.status}`);
-  return res.json();
-};
+const get = (path) => ghGet(path, 'json', { agent: 'skilldeck-stats', tries: 3 });
 
 const { entries } = loadRegistry({ withRuns: false, withDrafts: true });
 // Участники наборов в entries не попадают — берём их из members.

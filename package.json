@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "validate": "node scripts/validate.mjs",
-    "index": "node scripts/build-index.mjs"
+    "index": "node scripts/build-index.mjs",
+    "discover": "node scripts/discover.mjs"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
