@@ -1,7 +1,7 @@
 ---
 name: defuddle
 title: "Чистый Markdown из веб-страницы"
-summary: "Достаёт со страницы основной текст без меню и рекламы и отдаёт его в Markdown."
+summary: "Достаёт со страницы основной текст без меню и рекламы и отдаёт его в Markdown."
 origin: curated
 author:
   name: Obsidian
@@ -22,7 +22,7 @@ scan:
   network: []
   outside_folder: false
   hidden_unicode: []
-draft: true
+todo: why
 ---
 1 файл, без скриптов.
 Нужна утилита Defuddle CLI, её ставят через npm.

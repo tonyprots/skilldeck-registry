@@ -1,7 +1,7 @@
 ---
 name: pptx
 title: "Презентации PowerPoint"
-summary: "Собирает деку в .pptx, вытаскивает текст из чужой, правит слайды по шаблону и показывает сетку миниатюр для проверки."
+summary: "Собирает презентацию в .pptx, вытаскивает текст из чужой, правит слайды по шаблону и показывает сетку миниатюр для выбора макета."
 origin: curated
 author:
   name: Anthropic
@@ -23,8 +23,8 @@ scan:
     - "schemas.openxmlformats.org"
   outside_folder: false
   hidden_unicode: []
-  note: "Адрес schemas.openxmlformats.org — пространство имён формата OOXML в коде, а не запрос в сеть."
-draft: true
+  note: "Адрес schemas.openxmlformats.org — пространство имён формата OOXML в коде, а не запрос в сеть."
+todo: why
 ---
 58 файлов, 17 скриптов.
 

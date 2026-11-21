@@ -1,7 +1,7 @@
 ---
 name: market-sizing
 title: "Объём рынка: TAM, SAM, SOM"
-summary: "Оценивает рынок сверху вниз и снизу вверх, ищет данные в вебе и выписывает допущения, на которых держится оценка."
+summary: "Оценивает рынок сверху вниз и снизу вверх по данным из веба. Допущения, на которых держится оценка, выписывает отдельно."
 origin: curated
 author:
   name: Pawel Huryn
@@ -22,7 +22,7 @@ scan:
   network: []
   outside_folder: false
   hidden_unicode: []
-draft: true
+todo: why
 ---
 1 файл, без скриптов.
 

@@ -1,7 +1,7 @@
 ---
 name: docx
 title: "Документы Word"
-summary: "Создаёт и правит файлы .docx: оглавление, колонтитулы, таблицы, правки в режиме рецензирования."
+summary: "Создаёт и редактирует файлы .docx: оглавление, номера страниц, таблицы, правки в режиме рецензирования."
 origin: curated
 author:
   name: Anthropic
@@ -23,8 +23,8 @@ scan:
     - "schemas.openxmlformats.org"
   outside_folder: false
   hidden_unicode: []
-  note: "Адрес schemas.openxmlformats.org — пространство имён формата OOXML в коде, а не запрос в сеть."
-draft: true
+  note: "Адрес schemas.openxmlformats.org — пространство имён формата OOXML в коде, а не запрос в сеть."
+todo: why
 ---
 61 файл, 15 скриптов.
 

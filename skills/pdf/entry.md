@@ -1,7 +1,7 @@
 ---
 name: pdf
-title: "Работа с PDF"
-summary: "Извлекает текст и таблицы, склеивает и разрезает файлы, заполняет формы, ставит водяные знаки, распознаёт сканы."
+title: "Работа с PDF"
+summary: "Извлекает текст и таблицы, склеивает и разрезает файлы, заполняет формы, ставит водяные знаки, распознаёт сканы."
 origin: curated
 author:
   name: Anthropic
@@ -22,7 +22,7 @@ scan:
   network: []
   outside_folder: false
   hidden_unicode: []
-draft: true
+todo: why
 ---
 12 файлов, 8 скриптов.
 

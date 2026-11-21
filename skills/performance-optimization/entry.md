@@ -1,7 +1,7 @@
 ---
 name: performance-optimization
 title: "Скорость приложения: сначала замер"
-summary: "Ищет, где на самом деле тормозит фронтенд, бэкенд или база, и только потом чинит: Core Web Vitals, запросы N+1, размер бандла."
+summary: "Чинит Core Web Vitals, запросы N+1 и размер бандла там, где замер показал, что тормозит фронтенд, бэкенд или база."
 origin: curated
 author:
   name: Addy Osmani
@@ -22,7 +22,7 @@ scan:
   network: []
   outside_folder: false
   hidden_unicode: []
-draft: true
+todo: why
 ---
 2 файла, без скриптов.
 

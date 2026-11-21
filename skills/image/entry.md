@@ -1,7 +1,7 @@
 ---
 name: image
 title: "Промпты для генераторов картинок"
-summary: "Пишет готовый промпт для Nano Banana или GPT Image и подсказывает, какую модель, качество и размер выбрать. Сам картинку не рисует."
+summary: "Пишет готовый промпт для Nano Banana или GPT Image и подсказывает, какую модель, качество и размер выбрать. Картинку по этому промпту рисует генератор."
 origin: curated
 author:
   name: Serge Shima
@@ -22,7 +22,7 @@ scan:
   network: []
   outside_folder: false
   hidden_unicode: []
-draft: true
+todo: why
 ---
 24 файла, без скриптов.
 

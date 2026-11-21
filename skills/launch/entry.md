@@ -1,7 +1,7 @@
 ---
 name: launch
 title: "План запуска продукта"
-summary: "Помогает решить, готов ли продукт, когда объявлять и где: Product Hunt, бета, лист ожидания, чек-лист запуска."
+summary: "Помогает решить, готов ли продукт, когда и где объявлять, и разбирает Product Hunt, бету, лист ожидания и чек-лист запуска."
 origin: curated
 author:
   name: Corey Haines
@@ -22,7 +22,7 @@ scan:
   network: []
   outside_folder: false
   hidden_unicode: []
-draft: true
+todo: why
 ---
 4 файла, без скриптов.
 

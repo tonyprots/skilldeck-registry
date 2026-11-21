@@ -1,7 +1,7 @@
 ---
 name: mcp-builder
 title: "Как написать MCP-сервер"
-summary: "Ведёт разработку MCP-сервера на Python или TypeScript: изучить API, спроектировать инструменты, написать и проверить на вопросах-эвалах."
+summary: "Ведёт разработку MCP-сервера на Python или TypeScript, начиная с изучения API и проектирования инструментов. Пишет код и проверяет его на тестовых вопросах."
 origin: curated
 author:
   name: Anthropic
@@ -22,7 +22,7 @@ scan:
   network: []
   outside_folder: false
   hidden_unicode: []
-draft: true
+todo: why
 ---
 11 файлов, 2 скрипта.
 
