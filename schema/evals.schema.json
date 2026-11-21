@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "evals.schema.json",
+  "title": "Набор задач скилла для прогона (evals.yaml)",
+  "description": "Входы и проверки, на которых обвязка registry/runner/ гоняет скилл. Входы публикуются вместе с прогоном, поэтому только свои или открытые материалы.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "prompt", "inputs", "checks"],
+  "properties": {
+    "version": { "description": "Версия формата evals.yaml", "const": 1 },
+    "prompt": {
+      "description": "Задание агенту, одно для обоих плеч. Подстановки {input} и {output} — пути к файлам относительно рабочей папки. Скилл в задании не называют: он должен сработать сам",
+      "type": "string",
+      "minLength": 20
+    },
+    "inputs": {
+      "description": "Две-три обычные задачи и хотя бы один плохой вход (протокол, шаг 2)",
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "title", "file", "source"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+          "kind": { "description": "typical — обычная задача; bad — плохой вход: пустой, битый, чужой язык, не по профилю", "enum": ["typical", "bad"] },
+          "title": { "description": "Что за вход, по-русски, для карточки", "type": "string", "minLength": 5 },
+          "file": { "description": "Файл входа относительно папки скилла, обычно inputs/<id>.md", "type": "string", "pattern": "^inputs/[A-Za-z0-9_.-]+$" },
+          "source": { "description": "Откуда вход и почему его можно публиковать", "type": "string", "minLength": 10 },
+          "prompt": { "description": "Своё задание для этого входа вместо общего", "type": "string", "minLength": 20 }
+        }
+      }
+    },
+    "checks": {
+      "description": "Проверки двух видов: script считает скрипт, critic — критерий для слепого критика",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "title"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+          "kind": { "enum": ["script", "critic"] },
+          "title": { "description": "Что проверяем, одной фразой по-русски", "type": "string", "minLength": 5 },
+          "inputs": {
+            "description": "Для каких входов; по умолчанию для всех",
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string" }
+          }
+        },
+        "oneOf": [
+          {
+            "additionalProperties": false,
+            "required": ["run", "better"],
+            "properties": {
+              "id": true, "kind": { "const": "script" }, "title": true, "inputs": true,
+              "run": {
+                "description": "Команда из корня реестра. Подстановки {input} и {output} — абсолютные пути. Скрипт печатает JSON {\"pass\": bool, \"value\": число, \"detail\": …}; ненулевой код выхода — сбой самой проверки",
+                "type": "string",
+                "minLength": 5
+              },
+              "better": { "description": "Какое value лучше при сравнении плеч", "enum": ["lower", "higher"] }
+            }
+          },
+          {
+            "additionalProperties": false,
+            "required": ["criterion"],
+            "properties": {
+              "id": true, "kind": { "const": "critic" }, "title": true, "inputs": true,
+              "criterion": { "description": "Вопрос критику: какой из двух выходов лучше и по какому признаку", "type": "string", "minLength": 20 }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

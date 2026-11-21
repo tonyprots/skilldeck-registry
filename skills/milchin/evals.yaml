@@ -1,0 +1,56 @@
+# Набор задач для прогона milchin (формат — schema/evals.schema.json).
+# Тексты написаны для прогона, дефекты в них вставлены нарочно; невидимые
+# символы — нулевой ширины в news-post и латинская «o» в meeting-letter.
+version: 1
+
+prompt: |
+  Приведи типографику текста в файле {input} к нормам русского набора:
+  кавычки, тире, неразрывные пробелы, многоточие, невидимые символы.
+  Слова, разметку, код и ссылки не меняй. Готовый текст целиком запиши
+  в файл {output}, без пояснений.
+
+inputs:
+  - id: news-post
+    kind: typical
+    title: "Объявление библиотеки в Markdown: прямые кавычки, вложенные кавычки, дефисы вместо тире, код и ссылка"
+    file: inputs/news-post.md
+    source: "Написан для прогона, публикуется вместе с ним"
+  - id: meeting-letter
+    kind: typical
+    title: "Письмо после встречи: суммы, сроки, диапазоны, латинская буква внутри русского слова"
+    file: inputs/meeting-letter.md
+    source: "Написан для прогона, публикуется вместе с ним"
+  - id: english-notes
+    kind: bad
+    title: "Чужой язык: английские заметки к релизу, русские правила к ним не применимы"
+    file: inputs/english-notes.md
+    source: "Написан для прогона, публикуется вместе с ним"
+
+checks:
+  - id: typography
+    kind: script
+    title: "Сколько нарушений типографики осталось в выходе"
+    run: "python3 runner/checks/ru-typography.py violations {output}"
+    better: lower
+    inputs: [news-post, meeting-letter]
+  - id: text-preserved
+    kind: script
+    title: "Текст не переписан: без учёта типографики выход совпадает со входом"
+    run: "python3 runner/checks/ru-typography.py preserved {input} {output}"
+    better: lower
+  - id: no-guillemets-in-english
+    kind: script
+    title: "В английском тексте не появились «ёлочки» и „лапки“"
+    run: "python3 runner/checks/ru-typography.py latin-quotes {output}"
+    better: lower
+    inputs: [english-notes]
+  - id: typography-quality
+    kind: critic
+    title: "Типографика ближе к норме, а текст не тронут"
+    criterion: "В каком выходе типографика ближе к нормам русского набора (кавычки «ёлочки» и „лапки“, тире вместо дефиса, неразрывные пробелы, многоточие), а слова, разметка, код и ссылки при этом остались как были?"
+    inputs: [news-post, meeting-letter]
+  - id: foreign-text-intact
+    kind: critic
+    title: "Английский текст не испорчен русскими правилами"
+    criterion: "Текст на английском. В каком выходе он не испорчен русскими правилами набора (нет «ёлочек», разметка и код целы), а если агент что-то поправил — по нормам английского языка?"
+    inputs: [english-notes]

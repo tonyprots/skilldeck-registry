@@ -20,6 +20,7 @@ addFormats(ajv);
 const json = (p) => JSON.parse(readFileSync(join(ROOT, p), 'utf8'));
 const checkEntry = ajv.compile(json('schema/entry.schema.json'));
 const checkRun = ajv.compile(json('schema/run.schema.json'));
+const checkEvals = ajv.compile(json('schema/evals.schema.json'));
 
 export const VERDICTS = {
   take: 'бери',
@@ -88,6 +89,75 @@ const readTasks = (raw) => {
 const dirs = (p) =>
   existsSync(p) ? readdirSync(p).filter((d) => !d.startsWith('.') && statSync(join(p, d)).isDirectory()).sort() : [];
 
+const ajvMessages = (list) =>
+  list.map((e) => `${e.instancePath || '/'} ${e.message}${e.params?.additionalProperty ? ` (${e.params.additionalProperty})` : ''}`);
+
+/**
+ * Набор задач скилла skills/<name>/evals.yaml (дорожка В2). Схема — форма,
+ * здесь — связи: файлы входов на месте, есть и обычный, и плохой вход,
+ * проверки ссылаются на известные входы и существующие скрипты, задание
+ * говорит агенту, куда положить выход. Нет файла — evals: null без ошибок.
+ * @returns {{ evals: any|null, errors: string[] }}
+ */
+export function loadEvals(name) {
+  const dir = join(ROOT, 'skills', name);
+  const p = join(dir, 'evals.yaml');
+  if (!existsSync(p)) return { evals: null, errors: [] };
+  const errors = [];
+  const evals = YAML.parse(readFileSync(p, 'utf8'));
+  if (!checkEvals(evals)) return { evals: null, errors: ajvMessages(checkEvals.errors) };
+  const ids = new Set(evals.inputs.map((i) => i.id));
+  if (ids.size !== evals.inputs.length) errors.push('повторяются id входов');
+  if (!evals.inputs.some((i) => i.kind === 'typical')) errors.push('нет обычного входа (kind: typical)');
+  if (!evals.inputs.some((i) => i.kind === 'bad')) errors.push('нет плохого входа (kind: bad) — протокол требует хотя бы один');
+  for (const i of evals.inputs) {
+    const f = join(dir, i.file);
+    if (!existsSync(f)) errors.push(`вход "${i.id}": файла ${i.file} нет`);
+    // Пустой файл — законный плохой вход, а обычная задача без текста — ошибка.
+    else if (i.kind === 'typical' && !readFileSync(f, 'utf8').trim()) errors.push(`вход "${i.id}": файл ${i.file} пустой`);
+    if (!(i.prompt ?? evals.prompt).includes('{output}')) errors.push(`вход "${i.id}": в задании нет {output} — агенту некуда положить выход`);
+  }
+  const checkIds = new Set(evals.checks.map((c) => c.id));
+  if (checkIds.size !== evals.checks.length) errors.push('повторяются id проверок');
+  if (!evals.checks.some((c) => c.kind === 'critic')) errors.push('нет ни одного критерия для слепого критика (kind: critic)');
+  for (const c of evals.checks) {
+    for (const id of c.inputs ?? []) if (!ids.has(id)) errors.push(`проверка "${c.id}": неизвестный вход "${id}"`);
+    if (c.kind !== 'script') continue;
+    // Пути в команде считаются от корня реестра: скрипт проверки — наш код, он лежит здесь.
+    for (const tok of c.run.split(/\s+/)) {
+      if (tok.includes('/') && !tok.includes('{') && !existsSync(join(ROOT, tok))) errors.push(`проверка "${c.id}": нет файла ${tok}`);
+    }
+  }
+  return { evals: { ...evals, dir }, errors };
+}
+
+/**
+ * Прогон skills/<name>/runs/<папка>/run.yaml: схема и связи входов с результатами.
+ * Тем же кодом обвязка проверяет run.yaml, который только что записала.
+ * @returns {{ run: any|null, errors: string[] }}
+ */
+export function readRun(runDir, { protocolVersion, production = false } = {}) {
+  const errors = [];
+  if (!existsSync(join(runDir, 'run.yaml'))) return { run: null, errors: ['файла нет'] };
+  const run = YAML.parse(readFileSync(join(runDir, 'run.yaml'), 'utf8'));
+  if (typeof run?.skill_commit === 'number') errors.push('skill_commit прочитан как число — возьмите хеш в кавычки');
+  if (!checkRun(run)) return { run: null, errors: [...errors, ...ajvMessages(checkRun.errors)] };
+  const runName = runDir.split('/').pop();
+  if (!runName.startsWith(run.date)) errors.push(`папка не начинается с даты ${run.date}`);
+  if (protocolVersion && run.protocol > protocolVersion) errors.push(`протокол v${run.protocol} новее protocol.md v${protocolVersion}`);
+  const ids = new Set(run.inputs.map((i) => i.id));
+  if (ids.size !== run.inputs.length) errors.push('повторяются id входов');
+  if (!run.inputs.some((i) => i.kind === 'bad')) errors.push('нет плохого входа — протокол требует хотя бы один');
+  const covered = new Set(run.results.map((r) => r.input));
+  for (const r of run.results) if (!ids.has(r.input)) errors.push(`результат для неизвестного входа "${r.input}"`);
+  for (const id of ids) if (!covered.has(id)) errors.push(`нет результата для входа "${id}"`);
+  for (const r of run.results) {
+    for (const side of ['with-skill', 'baseline']) if (!existsSync(join(runDir, side, `${r.input}.md`))) errors.push(`нет выхода ${side}/${r.input}.md`);
+  }
+  if (production && run.demo) errors.push('демо-прогон в сборке для публикации');
+  return { run, errors };
+}
+
 const readOutput = (runDir, side, id) => {
   const p = join(runDir, side, `${id}.md`);
   return existsSync(p) ? readFileSync(p, 'utf8') : null;
@@ -107,8 +177,7 @@ export function loadRegistry({ production = false, withRuns = true, withDrafts =
   const errors = [];
   const warnings = [];
   const fail = (where, msg) => errors.push(`${where}: ${msg}`);
-  const ajvErrors = (where, list) =>
-    list.forEach((e) => fail(where, `${e.instancePath || '/'} ${e.message}${e.params?.additionalProperty ? ` (${e.params.additionalProperty})` : ''}`));
+  const ajvErrors = (where, list) => ajvMessages(list).forEach((m) => fail(where, m));
 
   const { tasks, intros: taskIntros, bad } = readTasks(YAML.parse(readFileSync(join(ROOT, 'tasks.yaml'), 'utf8')));
   for (const slug of bad) fail('tasks.yaml', `задача "${slug}" — не строка и не { title, intro }`);
@@ -118,6 +187,7 @@ export function loadRegistry({ production = false, withRuns = true, withDrafts =
   if (!Number.isInteger(protocol.version)) fail('protocol.md', 'во frontmatter нет целого version');
 
   const entries = [];
+  let evalSets = 0;
   for (const name of dirs(join(ROOT, 'skills'))) {
     const dir = join(ROOT, 'skills', name);
     const where = `skills/${name}/entry.md`;
@@ -130,23 +200,17 @@ export function loadRegistry({ production = false, withRuns = true, withDrafts =
     if (!content.trim()) fail(where, 'нет текста от автора');
     if (data.scan?.hidden_unicode.length && !data.scan.note) fail(where, 'в разборе скрытый юникод — нужен note после просмотра');
 
+    const { errors: evalErrors } = loadEvals(name);
+    for (const m of evalErrors) fail(`skills/${name}/evals.yaml`, m);
+    if (existsSync(join(dir, 'evals.yaml'))) evalSets += 1;
+
     const runs = [];
     for (const runName of withRuns ? dirs(join(dir, 'runs')) : []) {
       const runDir = join(dir, 'runs', runName);
       const rwhere = `skills/${name}/runs/${runName}/run.yaml`;
-      if (!existsSync(join(runDir, 'run.yaml'))) { fail(rwhere, 'файла нет'); continue; }
-      const run = YAML.parse(readFileSync(join(runDir, 'run.yaml'), 'utf8'));
-      if (typeof run?.skill_commit === 'number') fail(rwhere, 'skill_commit прочитан как число — возьмите хеш в кавычки');
-      if (!checkRun(run)) { ajvErrors(rwhere, checkRun.errors); continue; }
-      if (!runName.startsWith(run.date)) fail(rwhere, `папка не начинается с даты ${run.date}`);
-      if (run.protocol > protocol.version) fail(rwhere, `протокол v${run.protocol} новее protocol.md v${protocol.version}`);
-      const ids = new Set(run.inputs.map((i) => i.id));
-      if (ids.size !== run.inputs.length) fail(rwhere, 'повторяются id входов');
-      if (!run.inputs.some((i) => i.kind === 'bad')) fail(rwhere, 'нет плохого входа — протокол требует хотя бы один');
-      const covered = new Set(run.results.map((r) => r.input));
-      for (const r of run.results) if (!ids.has(r.input)) fail(rwhere, `результат для неизвестного входа "${r.input}"`);
-      for (const id of ids) if (!covered.has(id)) fail(rwhere, `нет результата для входа "${id}"`);
-      if (production && run.demo) fail(rwhere, 'демо-прогон в сборке для публикации');
+      const { run, errors: runErrors } = readRun(runDir, { protocolVersion: protocol.version, production });
+      for (const m of runErrors) fail(rwhere, m);
+      if (!run) continue;
       runs.push({
         ...run,
         slug: runName,
@@ -202,7 +266,7 @@ export function loadRegistry({ production = false, withRuns = true, withDrafts =
       if (e.todo === 'why') warnings.push(`${where}: нет текста «Зачем он мне» (todo: why), раздел на сайте скрыт`);
     }
   }
-  return { entries: entries.filter((e) => !inSet.has(e.name)), tasks, taskIntros, protocol, errors, warnings };
+  return { entries: entries.filter((e) => !inSet.has(e.name)), tasks, taskIntros, protocol, evalSets, errors, warnings };
 }
 
 /**

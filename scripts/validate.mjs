@@ -3,10 +3,11 @@
 // черновики пропускаются, демо-прогоны считаются ошибкой, а редакторские
 // хвосты («Черновик редакции» без todo, «проверить» в scan.note) — тоже.
 // Карточки с todo: why — предупреждение: сборка зелёная, раздел на сайте скрыт.
+// Наборы задач skills/<имя>/evals.yaml проверяются схемой и связями (lib.mjs, loadEvals).
 import { loadRegistry } from './lib.mjs';
 
 const production = process.argv.includes('--production');
-const { entries, errors, warnings } = loadRegistry({ production });
+const { entries, evalSets, errors, warnings } = loadRegistry({ production });
 const runs = entries.reduce((n, e) => n + e.runs.length, 0);
 
 if (warnings.length) {
@@ -19,4 +20,4 @@ if (errors.length) {
   for (const e of errors) console.error(`  ${e}`);
   process.exit(1);
 }
-console.log(`ОК: карточек ${entries.length}, прогонов ${runs}${production ? ' (режим публикации)' : ''}`);
+console.log(`ОК: карточек ${entries.length}, наборов задач ${evalSets}, прогонов ${runs}${production ? ' (режим публикации)' : ''}`);
