@@ -1,4 +1,11 @@
 {
+  "Agents365-ai/drawio-skill": {
+    "stars": 10887,
+    "date": "2026-11-21"
+  },
+  "Agents365-ai/drawio-skill@6550495129d9": {
+    "commit_date": "2026-11-10"
+  },
   "Ashutos1997/claude-design-auditor-skill": {
     "stars": 96,
     "date": "2026-11-21"
@@ -13,50 +20,78 @@
   "DenisSergeevitch/agents-best-practices@da245f8cbfc4": {
     "commit_date": "2026-10-19"
   },
+  "DenisSergeevitch/ex-ussr-kinship-research": {
+    "stars": 2717,
+    "date": "2026-11-21"
+  },
+  "DenisSergeevitch/ex-ussr-kinship-research@d2ce9075de02": {
+    "commit_date": "2026-11-20"
+  },
+  "DietrichGebert/ponytail": {
+    "stars": 196282,
+    "date": "2026-11-21"
+  },
+  "DietrichGebert/ponytail@96608e078b2d": {
+    "commit_date": "2026-10-29"
+  },
   "Egonex-AI/Understand-Anything": {
-    "stars": 93540,
+    "stars": 93546,
     "date": "2026-11-21"
   },
   "Egonex-AI/Understand-Anything@bb70fdb0489f": {
     "commit_date": "2026-11-18"
   },
   "JuliusBrussee/caveman": {
-    "stars": 121955,
+    "stars": 121964,
     "date": "2026-11-21"
   },
   "JuliusBrussee/caveman@bad48a0e1df5": {
     "commit_date": "2026-10-17"
   },
   "Leonxlnx/taste-skill": {
-    "stars": 119686,
+    "stars": 119703,
     "date": "2026-11-21"
   },
   "Leonxlnx/taste-skill@b9ca2fd8047f": {
     "commit_date": "2026-10-19"
   },
   "NVIDIA/SkillSpector": {
-    "stars": 27160,
+    "stars": 27166,
     "date": "2026-11-21"
   },
   "NVIDIA/SkillSpector@48e0f942ea1f": {
     "commit_date": "2026-11-19"
   },
+  "Socialpranker/deepdive": {
+    "stars": 258,
+    "date": "2026-11-21"
+  },
+  "Socialpranker/deepdive@e2337975f6b3": {
+    "commit_date": "2026-11-17"
+  },
+  "Vladimir-Human/ru-marketplace-mcp": {
+    "stars": 202,
+    "date": "2026-11-21"
+  },
+  "Vladimir-Human/ru-marketplace-mcp@20fc7dc6f28a": {
+    "commit_date": "2026-11-21"
+  },
   "addyosmani/agent-skills": {
-    "stars": 119551,
+    "stars": 119558,
     "date": "2026-11-21"
   },
   "addyosmani/agent-skills@8c99fa36d900": {
     "commit_date": "2026-11-18"
   },
   "anthropics/claude-cookbooks": {
-    "stars": 54949,
+    "stars": 54950,
     "date": "2026-11-21"
   },
   "anthropics/claude-cookbooks@8ad5de647d4f": {
     "commit_date": "2026-11-20"
   },
   "anthropics/skills": {
-    "stars": 198407,
+    "stars": 198427,
     "date": "2026-11-21"
   },
   "anthropics/skills@dbd4588f9e10": {
@@ -64,6 +99,13 @@
   },
   "anthropics/skills@e4bb5d960d87": {
     "commit_date": "2026-11-16"
+  },
+  "ayghri/i-have-adhd": {
+    "stars": 61887,
+    "date": "2026-11-21"
+  },
+  "ayghri/i-have-adhd@1ecea1993b7f": {
+    "commit_date": "2026-10-11"
   },
   "beaverbeard/agranovsky": {
     "stars": 5,
@@ -108,28 +150,35 @@
     "commit_date": "2026-10-02"
   },
   "cathrynlavery/diagram-design": {
-    "stars": 69726,
+    "stars": 69747,
     "date": "2026-11-21"
   },
   "cathrynlavery/diagram-design@550fd66edff0": {
     "commit_date": "2026-10-16"
   },
   "cloudflare/security-audit-skill": {
-    "stars": 76614,
+    "stars": 76638,
     "date": "2026-11-21"
   },
   "cloudflare/security-audit-skill@c1c8a8c14710": {
     "commit_date": "2026-09-14"
   },
   "coreyhaines31/marketingskills": {
-    "stars": 61851,
+    "stars": 61862,
     "date": "2026-11-21"
   },
   "coreyhaines31/marketingskills@5b2b400eec1e": {
     "commit_date": "2026-11-20"
   },
+  "edvardgrishin27/nativeprompt": {
+    "stars": 129,
+    "date": "2026-11-21"
+  },
+  "edvardgrishin27/nativeprompt@f2ab8f3b97df": {
+    "commit_date": "2026-11-11"
+  },
   "emilkowalski/skills": {
-    "stars": 58623,
+    "stars": 58638,
     "date": "2026-11-21"
   },
   "emilkowalski/skills@2d228630ba14": {
@@ -139,11 +188,18 @@
     "commit_date": "2026-11-15"
   },
   "guillaumemeyer/watermarks-remover": {
-    "stars": 28028,
+    "stars": 28034,
     "date": "2026-11-21"
   },
   "guillaumemeyer/watermarks-remover@5a62be6338d2": {
     "commit_date": "2026-11-01"
+  },
+  "ibelick/ui-skills": {
+    "stars": 11280,
+    "date": "2026-11-21"
+  },
+  "ibelick/ui-skills@7ef0076fce1d": {
+    "commit_date": "2026-11-21"
   },
   "ilyautov/humanizer-ru": {
     "stars": 602,
@@ -153,14 +209,14 @@
     "commit_date": "2026-10-19"
   },
   "jakubkrehel/make-interfaces-feel-better": {
-    "stars": 4212,
+    "stars": 4213,
     "date": "2026-11-21"
   },
   "jakubkrehel/make-interfaces-feel-better@35545ea1512a": {
     "commit_date": "2026-08-29"
   },
   "mattpocock/skills": {
-    "stars": 329658,
+    "stars": 329691,
     "date": "2026-11-21"
   },
   "mattpocock/skills@49dd158d1076": {
@@ -170,21 +226,21 @@
     "commit_date": "2026-11-19"
   },
   "mvanhorn/last30days-skill": {
-    "stars": 71888,
+    "stars": 71908,
     "date": "2026-11-21"
   },
   "mvanhorn/last30days-skill@8ede659374b2": {
     "commit_date": "2026-11-21"
   },
   "nextlevelbuilder/ui-ux-pro-max-skill": {
-    "stars": 152454,
+    "stars": 152474,
     "date": "2026-11-21"
   },
   "nextlevelbuilder/ui-ux-pro-max-skill@56ea9cf174ed": {
     "commit_date": "2026-10-15"
   },
   "obra/superpowers": {
-    "stars": 323593,
+    "stars": 323623,
     "date": "2026-11-21"
   },
   "obra/superpowers@22f0b463e7a5": {
@@ -193,12 +249,26 @@
   "obra/superpowers@bb92a7774141": {
     "commit_date": "2026-10-10"
   },
+  "obsidianmd/obsidian-skills": {
+    "stars": 53379,
+    "date": "2026-11-21"
+  },
+  "obsidianmd/obsidian-skills@b110b2f8e9eb": {
+    "commit_date": "2026-11-20"
+  },
   "pbakaus/impeccable": {
-    "stars": 114457,
+    "stars": 114476,
     "date": "2026-11-21"
   },
   "pbakaus/impeccable@0665bd812ae0": {
     "commit_date": "2026-10-19"
+  },
+  "phuryn/pm-skills": {
+    "stars": 28208,
+    "date": "2026-11-21"
+  },
+  "phuryn/pm-skills@9af7bfd0bc47": {
+    "commit_date": "2026-11-08"
   },
   "ponomr/palych": {
     "stars": 14,
@@ -207,12 +277,29 @@
   "ponomr/palych@57c2d6c848a3": {
     "commit_date": "2026-10-17"
   },
+  "reactive-resume/reactive-resume": {
+    "stars": 45960,
+    "date": "2026-11-21"
+  },
+  "reactive-resume/reactive-resume@897bcf8e740a": {
+    "commit_date": "2026-11-20"
+  },
+  "smixs/visual-skills": {
+    "stars": 728,
+    "date": "2026-11-21"
+  },
+  "smixs/visual-skills@61a60d317f0f": {
+    "commit_date": "2026-11-06"
+  },
   "talkstream/ru-text": {
     "stars": 300,
     "date": "2026-11-21"
   },
   "talkstream/ru-text@374a77943648": {
     "commit_date": "2026-10-18"
+  },
+  "talkstream/ru-text@e398aec9e6f0": {
+    "commit_date": "2026-10-25"
   },
   "tonyprots/html-deck-skill": {
     "stars": 0,
@@ -236,10 +323,17 @@
     "commit_date": "2026-10-17"
   },
   "tt-a1i/archify": {
-    "stars": 98550,
+    "stars": 98564,
     "date": "2026-11-21"
   },
   "tt-a1i/archify@8509a3d63e76": {
+    "commit_date": "2026-11-21"
+  },
+  "tw93/Kami": {
+    "stars": 12599,
+    "date": "2026-11-21"
+  },
+  "tw93/Kami@27177605ad00": {
     "commit_date": "2026-11-21"
   },
   "tw93/Waza": {
@@ -248,6 +342,13 @@
   },
   "tw93/Waza@b944ba7b815f": {
     "commit_date": "2026-11-18"
+  },
+  "virgiliojr94/book-to-skill": {
+    "stars": 38639,
+    "date": "2026-11-21"
+  },
+  "virgiliojr94/book-to-skill@57f3db51ff33": {
+    "commit_date": "2026-11-19"
   },
   "zamesin/Next-Move-Theory-Canon-and-Skills": {
     "stars": 477,

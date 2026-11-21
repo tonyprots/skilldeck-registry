@@ -1,21 +1,21 @@
 ---
 name: ru-text
-title: "Качество русского текста: типографика, инфостиль, редактура"
-summary: "Молча чинит типографику в любом русском выводе агента, по просьбе вычитывает и правит: инфостиль, деловая переписка, интерфейсные тексты, чистка от ИИ."
+title: "Вычитка русского текста: типографика и редактура"
+summary: "Молча правит типографику в любом русском тексте агента, а по просьбе вычитывает: инфостиль, деловая переписка, тексты интерфейса, следы нейросети."
 origin: curated
 author:
-  name: talkstream
+  name: Arseniy Kamyshev
   url: https://github.com/talkstream
 source:
   repo: talkstream/ru-text
   path: skills/ru-text
-  commit: "374a77943648"
+  commit: "e398aec9e6f0"
 license: MIT
 agents: [claude-code, codex]
 roles: [writer, marketer, universal]
-tasks: [russian-text]
+tasks: [russian-text, writing]
 scan:
-  date: "2026-10-19"
+  date: "2026-11-21"
   files: 13
   scripts: 0
   runs_commands: false
@@ -24,7 +24,6 @@ scan:
   hidden_unicode: []
 draft: true
 ---
-
-Один скилл на несколько подзадач: типографика работает фоном, редактура — по запросу. Внутри 13 файлов справочников, исполняемого кода нет.
+13 файлов, без скриптов.
 
 Черновик редакции по SKILL.md. «Зачем он мне» — после отбора.
