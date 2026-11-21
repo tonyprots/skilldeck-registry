@@ -1,2 +1,5 @@
 node_modules/
 .DS_Store
+.cache/
+# Сборщик кандидатов: пересобирается npm run discover, в git только candidates.md
+candidates.json
