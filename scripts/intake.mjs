@@ -15,21 +15,9 @@
  * поэтому на сайте он называется «автоматический разбор», а не «безопасно».
  */
 import YAML from 'yaml';
-import matter from 'gray-matter';
+import { RAW, ghGet, SKILL_FILE, dirOf, readSkillFrontmatter, specIssues, repoLicense, LICENSE_FILE, licenseFromText } from './github.mjs';
 
-const API = 'https://api.github.com';
-const RAW = 'https://raw.githubusercontent.com';
-const headers = {
-  Accept: 'application/vnd.github+json',
-  'User-Agent': 'skilldeck-intake',
-  ...(process.env.GITHUB_TOKEN && { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }),
-};
-
-const get = async (url, as = 'json') => {
-  const r = await fetch(url, { headers });
-  if (!r.ok) throw new Error(`${r.status} ${url}`);
-  return as === 'json' ? r.json() : r.text();
-};
+const get = (url, as) => ghGet(url, as, { agent: 'skilldeck-intake' });
 
 const CODE = /\.(py|sh|bash|zsh|js|mjs|cjs|ts|rb|go|ps1)$/i;
 const TEXT = /\.(md|txt|ya?ml|json|toml|csv|html|css|py|sh|bash|zsh|js|mjs|cjs|ts|rb|go|ps1)$/i;
@@ -54,12 +42,11 @@ if (!repo || !/^[\w.-]+\/[\w.-]+$/.test(repo)) {
   process.exit(2);
 }
 
-const meta = await get(`${API}/repos/${repo}`);
-const head = await get(`${API}/repos/${repo}/commits/${meta.default_branch}`);
+const meta = await get(`/repos/${repo}`);
+const head = await get(`/repos/${repo}/commits/${meta.default_branch}`);
 const commit = head.sha;
-const tree = (await get(`${API}/repos/${repo}/git/trees/${commit}?recursive=1`)).tree;
-const skillFiles = tree.filter((t) => t.type === 'blob' && /(^|\/)SKILL\.md$/.test(t.path));
-const dirOf = (p) => (p.includes('/') ? p.slice(0, p.lastIndexOf('/')) : '');
+const tree = (await get(`/repos/${repo}/git/trees/${commit}?recursive=1`)).tree;
+const skillFiles = tree.filter((t) => t.type === 'blob' && SKILL_FILE.test(t.path));
 
 const wantPath = opt('--path');
 const wantSkill = opt('--skill');
@@ -86,32 +73,14 @@ const skillMd = await get(`${RAW}/${repo}/${commit}/${candidates[0].path}`, 'tex
 // Спецификация Agent Skills: валидный YAML, name совпадает с папкой и не
 // длиннее 64, description до 1024. Агенты бывают снисходительнее парсера,
 // но строгий загрузчик на таком файле падает — это пишем в разбор.
-const spec = [];
-let fm;
-try {
-  fm = matter(skillMd).data;
-} catch {
-  spec.push('фронтматтер SKILL.md — невалидный YAML');
-  const head = skillMd.match(/^---\n([\s\S]*?)\n---/)?.[1] ?? '';
-  fm = Object.fromEntries([...head.matchAll(/^(name|description):\s*(.*)$/gm)].map((m) => [m[1], m[2].trim()]));
-}
+const { fm, spec } = readSkillFrontmatter(skillMd);
 const folder = dir.split('/').pop() || meta.name;
-if (!fm.name) spec.push('нет name');
-else if (fm.name !== folder) spec.push(`name «${fm.name}» не совпадает с папкой «${folder}»`);
-if (fm.name && !/^[a-z0-9]+(-[a-z0-9]+)*$/.test(fm.name)) spec.push('name не в формате a-z0-9 через дефис');
-if (!fm.description) spec.push('нет description');
-else if (String(fm.description).length > 1024) spec.push(`description длиннее 1024 (${String(fm.description).length})`);
+spec.push(...specIssues(fm, folder));
 
 // Лицензия: файл в папке скилла важнее лицензии репозитория.
-const licFile = inDir.find((t) => /^LICEN[CS]E(\.\w+)?$/i.test(rel(t.path)));
-let license = meta.license?.spdx_id && meta.license.spdx_id !== 'NOASSERTION' ? meta.license.spdx_id : 'none';
-if (licFile) {
-  const text = await get(`${RAW}/${repo}/${commit}/${licFile.path}`, 'text');
-  if (/Apache License/i.test(text)) license = 'Apache-2.0';
-  else if (/MIT License|Permission is hereby granted, free of charge/i.test(text)) license = 'MIT';
-  else if (/Attribution-ShareAlike 4\.0/i.test(text)) license = 'CC-BY-SA-4.0';
-  else if (/proprietary|All rights reserved/i.test(text)) license = 'proprietary';
-}
+const licFile = inDir.find((t) => LICENSE_FILE.test(rel(t.path)));
+let license = repoLicense(meta.license?.spdx_id);
+if (licFile) license = licenseFromText(await get(`${RAW}/${repo}/${commit}/${licFile.path}`, 'text'), license);
 
 const scripts = [];
 const network = new Set();
