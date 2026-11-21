@@ -1,7 +1,7 @@
 ---
 name: last30days
-title: "Что пишут о теме за 30 дней"
-summary: "Собирает свежие посты и обсуждения с Reddit, X, YouTube, Hacker News и других площадок и сводит их в обзор."
+title: "Что пишут о теме за 30 дней"
+summary: "Собирает свежие посты и обсуждения с Reddit, X, YouTube, Hacker News и других площадок и сводит их в обзор."
 origin: curated
 author:
   name: Matt Van Horn
@@ -78,7 +78,7 @@ scan:
   outside_folder: true
   hidden_unicode:
     - "scripts/lib/render.py"
-  note: "Скрытый юникод в scripts/lib/render.py — склейка ZWJ внутри эмодзи в таблице источников, не спрятанный текст."
+  note: "Скрытый юникод в scripts/lib/render.py — склейка ZWJ внутри эмодзи в таблице источников, не спрятанный текст."
 todo: why
 ---
 197 файлов, 167 скриптов.

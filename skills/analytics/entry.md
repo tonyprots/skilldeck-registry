@@ -1,7 +1,7 @@
 ---
 name: analytics
-title: "План трекинга и проверка метрик"
-summary: "Составляет план событий и UTM-меток, проверяет, правильно ли посчитана метрика. Для GA4, GTM, Mixpanel, PostHog."
+title: "План трекинга и проверка метрик"
+summary: "Составляет план событий и UTM-меток, проверяет, правильно ли посчитана метрика. Для GA4, GTM, Mixpanel, PostHog."
 origin: curated
 author:
   name: Corey Haines

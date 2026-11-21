@@ -1,7 +1,7 @@
 ---
 name: seo-audit
 title: "SEO-аудит сайта"
-summary: "Ищет, почему сайт не растёт в поиске: индексация, каноникалы, редиректы, hreflang, Core Web Vitals, заголовки."
+summary: "Выясняет, почему сайт не растёт в поиске: проверяет индексацию, каноникалы, редиректы, hreflang, Core Web Vitals и заголовки."
 origin: curated
 author:
   name: Corey Haines
