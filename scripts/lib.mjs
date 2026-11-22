@@ -71,19 +71,27 @@ const withCommitDate = (source, stats) => {
   return d ? { ...source, commit_date: d } : source;
 };
 
-/** Задача в tasks.yaml — строка-заголовок или объект { title, intro }. */
+/**
+ * Задача в tasks.yaml — строка-заголовок или объект { title, intro, groups }:
+ * intro — «Как выбрать» на странице сравнения, groups — подзадачи
+ * [{ title, skills: [...] }], по которым страница делит скиллы.
+ */
+const isGroups = (g) =>
+  Array.isArray(g) && g.every((x) => x && typeof x.title === 'string' && Array.isArray(x.skills) && x.skills.every((n) => typeof n === 'string'));
 const readTasks = (raw) => {
   const tasks = {};
   const intros = {};
+  const groups = {};
   const bad = [];
   for (const [slug, v] of Object.entries(raw ?? {})) {
     if (typeof v === 'string') tasks[slug] = v;
-    else if (v && typeof v.title === 'string' && (v.intro === undefined || typeof v.intro === 'string')) {
+    else if (v && typeof v.title === 'string' && (v.intro === undefined || typeof v.intro === 'string') && (v.groups === undefined || isGroups(v.groups))) {
       tasks[slug] = v.title;
       if (v.intro?.trim()) intros[slug] = v.intro.trim();
+      if (v.groups) groups[slug] = v.groups;
     } else bad.push(slug);
   }
-  return { tasks, intros, bad };
+  return { tasks, intros, groups, bad };
 };
 
 const dirs = (p) =>
@@ -170,7 +178,7 @@ const readOutput = (runDir, side, id) => {
  *   withDrafts: false — черновики выпадают и в обычной сборке.
  *   В режиме production ещё и редакторские проверки: «Черновик редакции» в тексте без
  *   todo и «проверить» в scan.note — ошибка; карточки с todo — предупреждение.
- * @returns {{ entries: any[], tasks: Record<string,string>, taskIntros: Record<string,string>,
+ * @returns {{ entries: any[], tasks: Record<string,string>, taskIntros: Record<string,string>, taskGroups: Record<string,{title:string,skills:string[]}[]>,
  *   protocol: {version:number, body:string}, errors: string[], warnings: string[] }}
  */
 export function loadRegistry({ production = false, withRuns = true, withDrafts = !production } = {}) {
@@ -179,8 +187,8 @@ export function loadRegistry({ production = false, withRuns = true, withDrafts =
   const fail = (where, msg) => errors.push(`${where}: ${msg}`);
   const ajvErrors = (where, list) => ajvMessages(list).forEach((m) => fail(where, m));
 
-  const { tasks, intros: taskIntros, bad } = readTasks(YAML.parse(readFileSync(join(ROOT, 'tasks.yaml'), 'utf8')));
-  for (const slug of bad) fail('tasks.yaml', `задача "${slug}" — не строка и не { title, intro }`);
+  const { tasks, intros: taskIntros, groups: taskGroups, bad } = readTasks(YAML.parse(readFileSync(join(ROOT, 'tasks.yaml'), 'utf8')));
+  for (const slug of bad) fail('tasks.yaml', `задача "${slug}" — не строка и не { title, intro, groups }`);
   const stats = readStats();
   const protoSrc = matter(readFileSync(join(ROOT, 'protocol.md'), 'utf8'));
   const protocol = { version: protoSrc.data.version, body: protoSrc.content };
@@ -266,7 +274,23 @@ export function loadRegistry({ production = false, withRuns = true, withDrafts =
       if (e.todo === 'why') warnings.push(`${where}: нет текста «Зачем он мне» (todo: why), раздел на сайте скрыт`);
     }
   }
-  return { entries: entries.filter((e) => !inSet.has(e.name)), tasks, taskIntros, protocol, evalSets, errors, warnings };
+  const shown = entries.filter((e) => !inSet.has(e.name));
+
+  // Подзадачи сравнения: каждый скилл задачи ровно в одной группе, чужих нет.
+  for (const [slug, gs] of Object.entries(taskGroups)) {
+    const where = `tasks.yaml: ${slug}`;
+    const inTask = new Set(shown.filter((e) => e.tasks.includes(slug)).map((e) => e.name));
+    const seen = new Map();
+    for (const g of gs) for (const n of g.skills) {
+      if (!inTask.has(n)) fail(where, `"${n}" в группе «${g.title}», но в задаче его нет`);
+      if (seen.has(n)) fail(where, `"${n}" сразу в двух группах: «${seen.get(n)}» и «${g.title}»`);
+      seen.set(n, g.title);
+    }
+    for (const n of inTask) if (!seen.has(n)) fail(where, `"${n}" в задаче, но ни в одной группе`);
+  }
+  if (production) for (const e of shown) if (!e.compare) warnings.push(`skills/${e.name}/entry.md: нет полей сравнения (compare), в таблице задачи будут пустые ячейки`);
+
+  return { entries: shown, tasks, taskIntros, taskGroups, protocol, evalSets, errors, warnings };
 }
 
 /**
@@ -365,6 +389,7 @@ export function buildIndex(entries, { site, tasks } = {}) {
       agents: e.agents,
       tasks: e.tasks,
       roles: e.roles,
+      ...(e.compare && { compare: e.compare }),
       ...(e.members && {
         includes: e.members.map((m) => ({
           name: m.name,

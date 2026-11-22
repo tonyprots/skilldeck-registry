@@ -23,6 +23,11 @@ scan:
   outside_folder: false
   hidden_unicode: []
 todo: why
+compare:
+  pick: "надо достать данные из PDF, склеить или разрезать файлы, заполнить форму или распознать скан"
+  how: "Справочник рецептов на Python-библиотеках и qpdf: слияние, разрезка, таблицы, формы, распознавание"
+  gives: "Новый или изменённый PDF, извлечённый текст и таблицы"
+  needs: "Python: pypdf, pdfplumber, reportlab; утилиты qpdf и poppler; для распознавания — pytesseract и pdf2image"
 ---
 12 файлов, 8 скриптов.
 

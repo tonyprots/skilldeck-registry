@@ -123,6 +123,18 @@
       "uniqueItems": true,
       "items": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" }
     },
+    "compare": {
+      "description": "Поля сравнения на странице задачи: как работает, что на выходе, что нужно кроме агента, когда брать (продолжение «Брать, если…»)",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["how", "gives", "needs", "pick"],
+      "properties": {
+        "how": { "type": "string", "minLength": 20, "maxLength": 140 },
+        "gives": { "type": "string", "minLength": 10, "maxLength": 110 },
+        "needs": { "type": "string", "minLength": 5, "maxLength": 110 },
+        "pick": { "type": "string", "minLength": 20, "maxLength": 150 }
+      }
+    },
     "pinned": { "description": "Только порядок: закреплённые идут первыми", "type": "boolean" },
     "todo": {
       "description": "Чего не хватает карточке. why — нет текста «Зачем он мне» от автора каталога: сайт не показывает тело карточки",

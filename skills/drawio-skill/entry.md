@@ -31,6 +31,11 @@ scan:
   outside_folder: true
   hidden_unicode: []
 todo: why
+compare:
+  pick: "схему потом будут править руками в draw.io или держать в синхроне с кодом и конфигами"
+  how: "Вызывается командой. Пишет XML draw.io или собирает схему из Terraform, K8s, SQL и OpenAPI"
+  gives: "Редактируемый файл .drawio и экспорт в PNG, SVG или PDF"
+  needs: "Python 3; приложение draw.io для экспорта и Graphviz для раскладки — по желанию"
 ---
 80 файлов, 46 скриптов.
 Вызывается только командой: сам агент его не подхватывает.

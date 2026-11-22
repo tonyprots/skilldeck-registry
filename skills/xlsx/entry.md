@@ -25,6 +25,11 @@ scan:
   hidden_unicode: []
   note: "Адрес schemas.openxmlformats.org — пространство имён формата OOXML в коде, а не запрос в сеть. Сокет в scripts/office/soffice.py локальный (AF_UNIX): через него скилл обращается к LibreOffice."
 todo: why
+compare:
+  pick: "на входе или выходе таблица Excel или CSV, а в книге Excel должны остаться рабочие формулы"
+  how: "Правит книги через openpyxl и pandas, пересчитывает формулы в LibreOffice и ищет в них ошибки"
+  gives: "Файл .xlsx с рабочими формулами и без ошибок пересчёта"
+  needs: "Python с openpyxl, pandas и markitdown; LibreOffice для пересчёта"
 ---
 53 файла, 12 скриптов.
 Для пересчёта формул нужен LibreOffice.

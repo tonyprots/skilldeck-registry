@@ -23,6 +23,11 @@ scan:
   outside_folder: false
   hidden_unicode: []
 todo: why
+compare:
+  pick: "нужно забрать текст статьи со страницы в чистом Markdown без ручной чистки"
+  how: "Вызывает Defuddle CLI: срезает со страницы меню и рекламу и отдаёт основной текст"
+  gives: "Markdown-файл с текстом страницы или её метаданные"
+  needs: "Node.js и Defuddle CLI (npm install -g defuddle)"
 ---
 1 файл, без скриптов.
 Нужна утилита Defuddle CLI, её ставят через npm.

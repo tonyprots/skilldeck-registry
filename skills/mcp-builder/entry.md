@@ -23,6 +23,11 @@ scan:
   outside_folder: false
   hidden_unicode: []
 todo: why
+compare:
+  pick: "нужно подключить к агенту внешний сервис или API через собственный MCP-сервер"
+  how: "Ведёт по четырём фазам: изучение API и спецификации MCP, код на TypeScript или Python, ревью и тесты, проверочные вопросы"
+  gives: "Код MCP-сервера и XML-файл с 10 проверочными вопросами"
+  needs: "Node или Python с SDK MCP; для прогона проверочных вопросов — ключ API Anthropic"
 ---
 11 файлов, 2 скрипта.
 

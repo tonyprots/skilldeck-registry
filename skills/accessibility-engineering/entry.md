@@ -23,6 +23,11 @@ scan:
   outside_folder: false
   hidden_unicode: []
 todo: why
+compare:
+  pick: "интерфейс уже готов и перед выпуском нужна проверка доступности по WCAG 2.2 AA"
+  how: "Прогоняет axe-core и pa11y, затем вручную проверяет клавиатуру, экранный диктор и масштаб 200%"
+  gives: "Нарушения по уровням серьёзности и исправления в коде"
+  needs: "Node для запуска axe-core и pa11y через npx; VoiceOver или NVDA"
 ---
 2 файла, 1 скрипт.
 

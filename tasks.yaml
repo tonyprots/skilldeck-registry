@@ -4,28 +4,274 @@
 transcription: Расшифровка аудио и видео
 russian-text:
   title: Тексты на русском
-  intro: >-
-    humanizer-ru чистит текст от следов нейросети: канцелярита, цепочек
-    существительных, штампов. Редколлегия — дирижёр и пятеро редакторов по
-    очереди: смысл, фактчек, чистка, корректура, типографика. Нужна только
-    чистка — берите первый, а если в тексте есть числа, цитаты и ссылки,
-    которые надо проверить, — второй.
-ui-design: Дизайн интерфейсов
-planning: Планы и решения
-token-economy: Краткие ответы агента
-coding: Код, тесты и отладка
-diagrams: Схемы и диаграммы
-agents: Устройство агентов
+  intro: "Скилл ru-text включается сам: ставит ёлочки, тире и неразрывные пробелы в любом русском
+    ответе агента, а по просьбе редактирует. Для чистки от канцелярита и штампов нейросети берут
+    humanizer-ru: сканер ставит балл, а правка в основном вычёркивает лишнее. Набор redkollegiya из
+    шести скиллов даёт полную вычитку с обязательным фактчеком, он нужен, когда в тексте есть числа,
+    цитаты или ссылки. Типографика ru-text работает рядом с любым из двух."
+ui-design:
+  title: Дизайн интерфейсов
+  intro: "Скиллы делят работу по этапам. Направление ищут в ui-ux-pro-max, где база стилей и палитр,
+    или в taste-skill: он рассчитан прежде всего на лендинги, выдаёт направление из библиотеки
+    сайтов и меряет страницу в браузере. Движение строят animate и apple-design: первый решает,
+    нужна ли анимация, второй даёт жесты и пружины. Чистят и шлифуют baseline-ui
+    и make-interfaces-feel-better, принимают design-auditor с баллом из ста
+    и accessibility-engineering по WCAG 2.2 AA."
+  groups:
+    - title: Выбор направления
+      skills:
+        - ui-ux-pro-max
+        - taste-skill
+    - title: Движение и жесты
+      skills:
+        - animate
+        - apple-design
+    - title: Чистка и шлифовка
+      skills:
+        - baseline-ui
+        - make-interfaces-feel-better
+    - title: Приёмка и доступность
+      skills:
+        - design-auditor
+        - accessibility-engineering
+planning:
+  title: Планы и решения
+  intro: "brainstorming и idea-refine работают до требований: первый расспрашивает и пишет
+    дизайн-документ, второй расширяет варианты и сужает их до одностраничника. Требования к продукту
+    пишет create-prd, а spec-driven-development ведёт работу по фазам: спецификация, план, задачи,
+    код. Готовый план pre-mortem проверяет на риски, prioritization-frameworks подсказывает метод,
+    чтобы выбрать порядок, а to-tickets режет план на задачи в трекере."
+  groups:
+    - title: Понять замысел
+      skills:
+        - brainstorming
+        - idea-refine
+    - title: Записать требования
+      skills:
+        - create-prd
+        - spec-driven-development
+    - title: Проверить и упорядочить
+      skills:
+        - pre-mortem
+        - prioritization-frameworks
+    - title: Разбить на задачи
+      skills:
+        - to-tickets
+token-economy:
+  title: Краткие ответы агента
+  intro: "ponytail и i-have-adhd включаются на всю сессию, но режут разное. ponytail — для работы
+    с кодом: самая маленькая правка и короткий ответ со строкой о том, что не проверено. i-have-adhd
+    меняет форму любых ответов: первая строка — действие, шаги по номерам, состояние задачи каждый
+    ход, конкретные оценки времени. Их можно включить вместе."
+coding:
+  title: Код, тесты и отладка
+  intro: spec-driven-development пишет спецификацию до кода, ponytail держит правки минимальными,
+    mcp-builder ведёт сборку MCP-сервера. Готовое изменение проверяет code-review-and-quality по
+    пяти осям, глубже по безопасности — security-audit с доказательствами и песочницей. Карту
+    незнакомого проекта строит understand, список рефакторингов даёт improve-codebase-architecture.
+    performance-optimization чинит скорость по замерам, webapp-testing прокликивает приложение
+    в Playwright; эти два скилла можно сочетать.
+  groups:
+    - title: Спецификация до кода
+      skills:
+        - spec-driven-development
+    - title: Написание кода
+      skills:
+        - ponytail
+        - mcp-builder
+    - title: Ревью и безопасность
+      skills:
+        - code-review-and-quality
+        - security-audit
+    - title: Разбор кодовой базы
+      skills:
+        - understand
+        - improve-codebase-architecture
+    - title: Скорость и проверка в браузере
+      skills:
+        - performance-optimization
+        - webapp-testing
+diagrams:
+  title: Схемы и диаграммы
+  intro: "Если схему будут править руками в редакторе, берите drawio-skill: он отдаёт файл .drawio
+    и собирает схему из Terraform, SQL или OpenAPI. Для схемы в документ или на сайт подходят
+    archify и diagram-design: первый проверяет HTML валидатором и в браузере, второй даёт 45 видов
+    схем и импорт из draw.io, Mermaid и Excalidraw."
+agents:
+  title: Устройство агентов
+  intro: "skill-creator и book-to-skill оба собирают скилл: первый — из рабочего процесса, с прогонами
+    и подбором описания, второй — из книги или документа. Скилл из book-to-skill можно доводить
+    тестовыми прогонами в skill-creator. skill-inspector проверяет чужой скилл до установки.
+    nativeprompt правит промпт и файлы инструкций под конкретную модель, mcp-builder пишет
+    MCP-сервер, через который агент получает новые инструменты."
+  groups:
+    - title: Сборка скилла
+      skills:
+        - skill-creator
+        - book-to-skill
+    - title: Проверка чужого скилла
+      skills:
+        - skill-inspector
+    - title: Промпты и инструкции
+      skills:
+        - nativeprompt
+    - title: Инструменты для агента
+      skills:
+        - mcp-builder
 video: Ролики и видео
-presentations: Презентации
-product: Продуктовые решения
-marketing: Маркетинг и рост
-research: Исследования
-data: Данные, метрики и таблицы
-security: Безопасность кода и скиллов
-writing: Тексты и рассылки
-finance: Финансы и модели
-graphics: Графика и постеры
-career: Резюме и поиск работы
-documents: Документы PDF и Word
+presentations:
+  title: Презентации
+  intro: "html-deck собирает деку для показа из браузера: сначала план «одна мысль на слайд», потом
+    вёрстка на сцене 1280×720 и проверка зазоров и контраста; PPTX он не делает. pptx работает
+    с файлами PowerPoint: собирает новый через pptxgenjs, правит чужой по шаблону и достаёт текст из
+    готовой деки. Сочетаются: если после показа нужен редактируемый файл, текст HTML-деки снимают
+    скриптом и собирают PPTX в pptx."
+product:
+  title: Продуктовые решения
+  intro: С сырой идеей идут в idea-refine за вариантами и одностраничником. Рынок считает
+    market-sizing, опросы о спросе и ценах составляет survey-design, требования пишет create-prd,
+    порядок работ подсказывает prioritization-frameworks. Перед запуском pre-mortem разбирает риски,
+    launch планирует сам запуск, pricing — тарифы, ab-testing — проверку изменений. nmt-chat —
+    отдельный набор из восьми скиллов, который проходит путь от оценки рынка до PRD и плана выхода
+    на рынок по одной методологии.
+  groups:
+    - title: Идея и замысел
+      skills:
+        - idea-refine
+    - title: Рынок и спрос
+      skills:
+        - market-sizing
+        - survey-design
+    - title: Требования и приоритеты
+      skills:
+        - create-prd
+        - prioritization-frameworks
+    - title: Риски и запуск
+      skills:
+        - pre-mortem
+        - launch
+    - title: Цены и эксперименты
+      skills:
+        - pricing
+        - ab-testing
+    - title: Весь путь по методологии
+      skills:
+        - nmt-chat
+marketing:
+  title: Маркетинг и рост
+  intro: copywriting пишет текст страницы с нуля или переписывает черновик, copy-editing правит
+    готовый текст без переписывания — их ставят друг за другом. customer-research разбирает интервью
+    и отзывы, last30days собирает свежие обсуждения темы; выводы обоих идут в copywriting. analytics
+    строит план трекинга, seo-audit ищет причины просадки в поиске, launch планирует, когда и где
+    объявить продукт.
+  groups:
+    - title: Тексты страниц
+      skills:
+        - copywriting
+        - copy-editing
+    - title: Изучение аудитории
+      skills:
+        - customer-research
+        - last30days
+    - title: Трафик и метрики
+      skills:
+        - analytics
+        - seo-audit
+    - title: Запуск продукта
+      skills:
+        - launch
+research:
+  title: Исследования
+  intro: "Отчёт по вопросу дают три скилла: deepdive ведёт многофазное исследование для выбора решения
+    и подкрепляет каждый факт цитатой, research отдаёт вопрос фоновому агенту и пишет заметку по
+    первоисточникам, learn собирает из источников статью или конспект. last30days собирает свежие
+    обсуждения в соцсетях, defuddle достаёт текст одной страницы и годится как источник для любого
+    из трёх. О клиентах и рынке — customer-research, survey-design и market-sizing."
+  groups:
+    - title: Отчёт по вопросу
+      skills:
+        - deepdive
+        - research
+        - learn
+    - title: Сбор материала из сети
+      skills:
+        - last30days
+        - defuddle
+    - title: Клиенты и рынок
+      skills:
+        - customer-research
+        - survey-design
+        - market-sizing
+data:
+  title: Данные, метрики и таблицы
+  intro: "xlsx работает с любой таблицей: формулы, форматирование, пересчёт в LibreOffice.
+    creating-financial-models строит DCF, сценарии и чувствительность скриптами на Python; если
+    модель нужна в Excel, его сочетают с xlsx. analytics составляет план событий и проверяет, верно
+    ли считаются метрики. ab-testing берёт выборку из таблиц, считает срок эксперимента и проверяет
+    значимость итогов."
+security:
+  title: Безопасность кода и скиллов
+  intro: "security-audit проверяет собственный код: ищет уязвимости на границах доверия и к каждой
+    даёт доказательство, воспроизведение и правку. skill-inspector проверяет чужой скилл до
+    установки: прогоняет SkillSpector, читает исходники и ставит вердикт APPROVE, CAUTION или
+    REJECT."
+writing:
+  title: Тексты и рассылки
+  intro: "Новый текст пишут copywriting (главная, лендинг, страница цен), cover-letter-writer (письмо
+    к отклику) и internal-comms (статусы и рассылки по образцам), а summarize-meeting делает заметку
+    из расшифровки встречи. Готовый текст правят три скилла: copy-editing — семь проходов по
+    маркетинговому тексту, ru-text — русская типографика и редактура, clean-user-facing-text —
+    скрытый юникод и замер стилометрией. Последний ставит прямые кавычки и убирает длинные тире,
+    поэтому русский текст после него прогоняют через ru-text."
+  groups:
+    - title: Правка готового текста
+      skills:
+        - clean-user-facing-text
+        - copy-editing
+        - ru-text
+    - title: Новый текст под задачу
+      skills:
+        - copywriting
+        - cover-letter-writer
+    - title: Рассылки и итоги встреч
+      skills:
+        - internal-comms
+        - summarize-meeting
+finance:
+  title: Финансы и модели
+  intro: "analyzing-financial-statements смотрит назад: по готовой отчётности считает коэффициенты
+    рентабельности, ликвидности, долга и оборачиваемости и толкует их. creating-financial-models
+    смотрит вперёд: прогнозирует денежные потоки, считает DCF, чувствительность и Монте-Карло. Их
+    сочетают: коэффициенты по истории компании становятся опорой для допущений модели."
+graphics:
+  title: Графика и постеры
+  intro: "canvas-design рисует сам: придумывает визуальное направление и кодом выводит постер в PNG
+    или PDF почти без текста. image ничего не рисует, а пишет промпт для Nano Banana или GPT Image
+    2.5 и подбирает модель, качество и размер. Для фотореалистичной картинки, правки снимка или
+    раскадровки берите image вместе с генератором картинок; для абстрактного постера —
+    canvas-design."
+career:
+  title: Резюме и поиск работы
+  intro: До отклика resume-tailor подгоняет копию резюме под вакансию по таблице требований,
+    cover-letter-writer пишет к ней письмо, а kami верстает готовый текст в PDF по шаблону. После
+    приглашения interview-prep готовит истории, вопросы и справку о компании, а offer-negotiation
+    разбирает оффер и готовит контрпредложение. Четыре скилла Reactive Resume работают и без его
+    MCP-сервера, а с ним читают и сохраняют записи откликов.
+  groups:
+    - title: Резюме и письмо
+      skills:
+        - resume-tailor
+        - cover-letter-writer
+        - kami
+    - title: Собеседование и оффер
+      skills:
+        - interview-prep
+        - offer-negotiation
+documents:
+  title: Документы PDF и Word
+  intro: "docx и pdf работают с файлами: первый создаёт и правит Word, в том числе с рецензированием
+    и комментариями, второй склеивает, режет, заполняет и распознаёт PDF. kami по шаблонам верстает
+    в PDF резюме, письма, одностраничники и отчёты; шаблоны на английском, китайском и корейском.
+    Сочетать можно так: документ свёрстан в kami, а pdf склеивает его с приложениями."
 shopping: Покупки и цены
+genealogy: Генеалогия и архивы
